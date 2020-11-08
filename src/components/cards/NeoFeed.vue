@@ -59,7 +59,7 @@ export default {
     getData(){
       this.$store.dispatch('fetchFromNeoFeed', this.dates)
       .then(data => {
-        this.$emit('newDat')
+        this.$emit('newDat','dateFilter')
         console.log(data)
       })
       .catch(err => {

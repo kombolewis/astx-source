@@ -16,9 +16,9 @@
             )
         
     div(v-if="requiredComponent == 'dateComponent'")
-      NeoFeed(@newDat="$emit('newDat')")
+      NeoFeed(@newDat="remit")
     div(v-else-if="requiredComponent == 'idComponent'")
-      IdSearch
+      IdSearch(@newDat="remit")
 </template>
 
 <script>
@@ -33,7 +33,12 @@ export default {
   data: () => ({
     requiredComponent:''
   }),
-
+  methods:{
+    remit(e){
+      console.log(e)
+      this.$emit('newDat', e)
+    }
+  }
 
 }
 </script>

@@ -29,6 +29,7 @@ export default {
   components:{
     Vertical
   },
+  
   beforeCreate(){
       this.$store.dispatch('fetchAllItems')
       .then(data => {

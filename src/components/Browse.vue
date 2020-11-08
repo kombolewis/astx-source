@@ -18,11 +18,11 @@ export default {
     
   },
   data: () => ({
-    renderNewView:true
+    renderNewView:'standardFilter'
   }),
   methods:{
-    renderNew(){
-      this.renderNewView = false
+    renderNew(e){
+      this.renderNewView = e
 
     },
     
