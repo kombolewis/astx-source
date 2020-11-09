@@ -4,8 +4,8 @@
       v-row 
         v-col(sm="10" offset-sm="1" lg="8" offset-lg="2")
           h2 Featured Objects 
-            v-btn(to="Register" text color="primary" small) View All
-            v-btn(to="Register" text color="primary" small) Saved Items
+            v-btn(:to="{name:'Browse'}" text color="primary" small) View All
+            v-btn(:to="{name:'Saved Items'}" text color="primary" small) Saved Items
       v-row
         v-col(sm="10" offset-sm="1" lg="8" offset-lg="2")
           v-row 

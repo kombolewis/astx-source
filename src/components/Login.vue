@@ -10,6 +10,7 @@
               v-text-field(
                 label="Username"
                 prepend-icon="mdi-account-circle"
+                v-model="email"
               )
               v-text-field(
                 :type="showPassword ? 'text' : 'password'" 
@@ -17,22 +18,50 @@
                 prepend-icon="mdi-lock"
                 :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
                 @click:append = " showPassword = !showPassword "
+                v-model="password"
               )
           v-divider
           v-card-actions
             v-btn(color="success" :to="{name: 'Register'}") Register
             v-spacer
-            v-btn(color="info" ) Login
+            v-btn(color="info" @keyup.enter="login" @click="login") Login
 
 
 </template>
 
 <script>
-  export default {
+import fb from '../firebase'
+export default {
     name: 'Login',
     data: () => ({
       showPassword: false,
-    })
-
+      email:'',
+      password:'',
+    }),
+    methods:{
+      login(){
+        fb.auth().signInWithEmailAndPassword(this.email, this.password)
+        .then(() => {
+          return this.$store.dispatch('loginUser', true)
+        })
+        .then(() => {
+          return this.$router.push({name:'Home'})
+        })
+        .then(() => {
+          this.$store.commit('updateSnackbar', {
+            show:true,
+            variant:'success',
+            message:'Login successful'
+          })
+        })
+        .catch(() => {
+          this.$store.commit('updateSnackbar', {
+            show:true,
+            variant:'error',
+            message:'Login Failed'
+          })
+        })
+      }
+    }
   }
 </script>

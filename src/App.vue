@@ -1,9 +1,25 @@
 <template lang="pug">
     v-app
-      Navbar(:links="links")
+      Navbar(:links="linksComputed")
       v-main
         router-view
-      Footer(:links="links")
+      v-snackbar(
+        v-model="$store.getters.checkShow"
+        :multi-line="true"
+        :right="true"
+        :top="true"
+        :timeout="6000"
+        :color="$store.getters.checkVariant"
+
+      )
+        | {{$store.getters.checkMessage}}
+        v-btn(
+          dark
+          text
+          @click="$store.commit('updateSnackbar', {show: false})"
+        )
+            | Close
+      Footer(:links="linksComputed")
 
 </template>
 
@@ -19,20 +35,35 @@ export default {
   },
 
   data: () => ({
-    links: [
-			{
-				label: 'Home',
-				url:'/'
-			},
-			{
-				label: 'Login',
-				url:'/login'
-      },
-      {
-				label: 'Browse',
-				url:'/browse'
-      },
-		]
+    show:this.$store.getters.checkshow,
+    variant:'',
+    message:''
   }),
+
+  computed:{
+    linksComputed(){
+      return[
+        {
+          label: 'Home',
+          url:'/'
+        },
+        {
+          label: 'Browse',
+          url:'/browse'
+        },
+        {
+          label: 'Saved Items',
+          url:'/saved-items'
+        },
+        {
+          label: this.$store.getters.isLoggedIn ? 'Logout':'Login',
+          url:'/login'
+        },
+      ]
+    },
+  },
+
+
+
 };
 </script>

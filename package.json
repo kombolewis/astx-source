@@ -11,10 +11,12 @@
     "axios": "^0.21.0",
     "core-js": "^3.6.5",
     "D": "^1.0.0",
+    "firebase": "^8.0.1",
     "promise": "^7.3.1",
     "pug": "^2.0.4",
     "pug-plain-loader": "^1.0.0",
     "vue": "^2.6.11",
+    "vue-firestore": "^0.3.30",
     "vue-router": "^3.2.0",
     "vuetify": "^2.2.11",
     "vuex": "^3.4.0"

@@ -4,11 +4,16 @@ import urls from './imageUrl'
 
 
 
+
 const state = {
   allItems: [],
   neoFeedItems:[],
-  item:[]
-
+  item:[],
+  loggedIn:localStorage.getItem('loggedInStatus') || null,
+  show:false,
+  variant:'',
+  message:''
+  
 
 
 };
@@ -37,10 +42,16 @@ const getters = {
 
   }),
   getItem: (state) => {
-      state.item['url'] = urls[0]
+      let i =  Math.floor(Math.random() * 11)
+      state.item['url'] = urls[i]
       return state.item
-  }
+  },
+  isLoggedIn: () => state.loggedIn != null,
 
+  checkShow: () => state.show,
+  checkVariant: () => state.variant,
+  checkMessage: () => state.message
+  
 
 };
 
@@ -92,6 +103,35 @@ const actions = {
         
     },
 
+    loginUser({commit,getters},data) {
+      return new Promise((resolve, reject) => {
+        if(!getters.isLoggedIn){
+          localStorage.setItem('loggedInStatus',data)
+          commit('setLoggedInUser',data) 
+          resolve('done')           
+        }else{
+          reject('unable to complete')
+        }
+     
+      })
+
+      
+    },
+   logoutUser({commit,getters}) {
+     return new Promise((resolve, reject) => {
+      if(getters.isLoggedIn){
+        localStorage.removeItem('loggedInStatus')
+        commit('removeLoggedInUser')
+        resolve('done')
+      }else{
+        reject('unable to complete')
+      }
+      
+       
+     })
+
+  },
+
 
 };
 
@@ -99,6 +139,15 @@ const mutations = {
     setItems: (state, data) => (state.allItems = data),
     setItem: (state, data) => (state.item = data),
     setNeoFeedItems: (state, data) => (state.neoFeedItems = data),
+    setLoggedInUser: (state, data) => (state.loggedIn = data),
+    removeLoggedInUser: (state) =>  (state.loggedIn = null),
+    updateSnackbar: (state,data) =>  {
+      state.message = data.message
+      state.variant = data.variant
+      state.show = data.show
+      return
+     
+    } 
 
 
 };

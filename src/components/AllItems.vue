@@ -16,7 +16,7 @@
         :key="item.index"
       )
         div(v-if="typeof(item)== 'string'")
-          VerticalStacked(:item="{year:item}")
+          VerticalStacked(:item="{day:item}")
         v-col(
           sm="6"
           md="4"

@@ -9,14 +9,45 @@
 			rounded 
 			:to="link.url"
 		)
-			| {{ link.label }}
+			span(@click="handleClicks(link.label)") {{ link.label }}
 
 		
 </template>
 
 <script>
+import fb from '../firebase'
 export default {
 		name:'Navbar',
-		props:['links']
+		props:['links'],
+		methods:{
+			handleClicks(label){
+				if(label == 'Logout'){
+					this.logout()
+				}
+			},
+			logout(){
+				fb.auth().signOut()
+				.then(() => {
+					return this.$store.dispatch('logoutUser')
+				})
+				.then(() => {
+					return this.$router.push({name:'Home'})
+				})
+				.then(() => {
+					this.$store.commit('updateSnackbar', {
+            show:true,
+            variant:'success',
+            message:'Logout successful'
+          })
+				})
+				.catch(() => {
+					this.$store.commit('updateSnackbar', {
+            show:true,
+            variant:'error',
+            message:'Log out failed'
+          })
+				})
+			}
+		}
 }
 </script>
