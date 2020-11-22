@@ -19,12 +19,13 @@
                 :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
                 @click:append = " showPassword = !showPassword "
                 v-model="password"
+                @keyup.enter="login"
               )
           v-divider
           v-card-actions
             v-btn(color="success" :to="{name: 'Register'}") Register
             v-spacer
-            v-btn(color="info" @keyup.enter="login" @click="login") Login
+            v-btn(color="info"  @click="login") Login
 
 
 </template>
