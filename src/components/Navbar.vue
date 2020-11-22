@@ -22,7 +22,6 @@ export default {
 		methods:{
 			handleClicks(label){
 				if(label == 'Logout'){
-					console.log('method called')
 					this.logout()
 				}
 			},
