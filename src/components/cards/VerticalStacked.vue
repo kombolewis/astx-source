@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import {db} from '../../firebase'
+import fb,{db} from '../../firebase'
 export default {
   name:'Vertical',
   props:['item'],
@@ -41,7 +41,8 @@ export default {
           url:this.item.url || null,
           estimatedDiameter:((parseFloat(this.item.estimated_diameter.kilometers.estimated_diameter_min) + parseFloat(this.item.estimated_diameter.kilometers.estimated_diameter_min) )/2).toFixed(2),
           day:this.item.day || null,
-          timeOfApproach:this.item.close_approach_data[0].close_approach_date_full || null
+          timeOfApproach:this.item.close_approach_data[0].close_approach_date_full || null,
+          user:fb.auth().currentUser.email
         })
         .then(() => {
           this.$store.commit('updateSnackbar', {

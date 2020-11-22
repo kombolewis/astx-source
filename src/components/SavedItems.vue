@@ -16,7 +16,7 @@
 
 <script>
 import VerticalSavedItems from './cards/VerticalSavedItems'
-import {db} from '../firebase'
+import fb,{db} from '../firebase'
 export default {
   name:'SavedItems',
   components:{
@@ -24,7 +24,7 @@ export default {
   },
   firestore(){
     return {
-      asteroids: db.collection('asteroids')
+      asteroids: db.collection('asteroids').where('user', '==', fb.auth().currentUser.email)
     }
   },
 

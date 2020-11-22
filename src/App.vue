@@ -12,12 +12,13 @@
         :color="$store.getters.checkVariant"
 
       )
-        | {{$store.getters.checkMessage}}
-        v-btn(
-          dark
-          text
-          @click="$store.commit('updateSnackbar', {show: false})"
-        )
+        .d-flex.justify-space-between.align-center
+          .subtitle-1 {{$store.getters.checkMessage}}
+          v-btn(
+            dark
+            text
+            @click="$store.commit('updateSnackbar', {show: false})"
+          )
             | Close
       Footer(:links="linksComputed")
 
