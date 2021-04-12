@@ -1,8 +1,6 @@
 # asteroid
 
-```
-Check out https://asterx.herokuapp.com for live project
-```
+<p>Check out https://asterx.herokuapp.com for live project </p>
 
 ## Project setup
 ```
