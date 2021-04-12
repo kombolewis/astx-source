@@ -1,5 +1,9 @@
 # asteroid
 
+```
+Check out https://asterx.herokuapp.com for live project
+```
+
 ## Project setup
 ```
 npm install
